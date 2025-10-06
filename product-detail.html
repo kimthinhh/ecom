@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail - Tnagule, Inc.</title>
+    <style>
+        @font-face {
+            font-family: 'Canva Sans';
+            src: url('fonts/CanvaSans-Regular.woff2') format('woff2'),
+                 url('fonts/CanvaSans-Regular.woff') format('woff'),
+                 url('fonts/CanvaSans-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Canva Sans';
+            src: url('fonts/CanvaSans-Bold.woff2') format('woff2'),
+                 url('fonts/CanvaSans-Bold.woff') format('woff'),
+                 url('fonts/CanvaSans-Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Migra';
+            src: url('fonts/Migra-Regular.woff2') format('woff2'),
+                 url('fonts/Migra-Regular.woff') format('woff'),
+                 url('fonts/Migra-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Migra';
+            src: url('fonts/Migra-Bold.woff2') format('woff2'),
+                 url('fonts/Migra-Bold.woff') format('woff'),
+                 url('fonts/Migra-Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #e8e4e1;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            font-style: italic;
+            color: #333;
+            text-decoration: none;
+            font-family: 'Migra', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: #8b4513;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icons .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            position: relative;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-icons .icon:hover {
+            opacity: 1;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #8b4513;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Product Detail Section */
+        .product-detail-section {
+            padding: 60px 0;
+            background-color: #f8f8f8;
+        }
+
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: flex;
+            gap: 20px;
+        }
+
+        .thumbnail-images {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: #8b4513;
+            transform: scale(1.05);
+        }
+
+        .main-image {
+            flex: 1;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Product Info */
+        .product-info {
+            padding: 20px 0;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        .product-price {
+            font-size: 24px;
+            color: #8b4513;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .product-options {
+            margin-bottom: 30px;
+        }
+
+        .option-group {
+            margin-bottom: 25px;
+        }
+
+        .option-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .size-option {
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .size-option:hover {
+            border-color: #8b4513;
+        }
+
+        .size-option.selected {
+            background-color: #8b4513;
+            color: white;
+            border-color: #8b4513;
+        }
+
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: none;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #6d3410;
+            transform: translateY(-2px);
+        }
+
+        /* Care Instructions */
+        .care-instructions {
+            margin-top: 60px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .care-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .care-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .care-list li {
+            padding: 8px 0;
+            color: #666;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .care-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #F5F0EB;
+            padding: 60px 0 40px;
+            margin-top: 80px;
+            font-family: 'Canva Sans', sans-serif;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            color: #333;
+            font-family: 'Migra', serif;
+        }
+
+        .footer-slogan {
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #8b4513;
+        }
+
+        .contact-info {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .contact-info div {
+            margin-bottom: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: #8b4513;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product-detail-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .image-gallery {
+                flex-direction: column;
+            }
+
+            .thumbnail-images {
+                flex-direction: row;
+                order: 2;
+            }
+
+            .thumbnail {
+                width: 60px;
+                height: 60px;
+            }
+
+            .main-image {
+                order: 1;
+            }
+
+            .main-image img {
+                height: 300px;
+            }
+
+            .product-title {
+                font-size: 24px;
+            }
+
+            .product-price {
+                font-size: 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .footer-brand {
+                align-items: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="index.html" class="logo">Tnagule, Inc.</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="product.html">Product</a></li>
+                    <li><a href="lookbook.html">Lookbook</a></li>
+                    <li><a href="collection.html">Collection</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="nav-icons">
+                    <div class="icon">🔍</div>
+                    <a href="cart.html" class="icon">
+                        🛒
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail-section">
+        <div class="product-detail-container">
+            <!-- Image Gallery -->
+            <div class="image-gallery">
+                <div class="thumbnail-images">
+                    <img src="images/products/hat1.jpg" alt="Product 1" class="thumbnail active" onclick="changeMainImage(this)">
+                    <img src="images/products/hat2.jpg" alt="Product 2" class="thumbnail" onclick="changeMainImage(this)">
+                    <img src="images/products/hat3.jpg" alt="Product 3" class="thumbnail" onclick="changeMainImage(this)">
+                </div>
+                <div class="main-image">
+                    <img src="images/products/hat1.jpg" alt="Product Image" id="mainProductImage">
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info">
+                <h1 class="product-title" id="productTitle">White Shirt</h1>
+                <p class="product-price" id="productPrice">$50.00</p>
+                
+                <div class="product-options">
+                    <div class="option-group">
+                        <label class="option-label">Size</label>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                        </div>
+                    </div>
+
+
+                    <div class="option-group">
+                        <label class="option-label">Number</label>
+                        <div class="quantity-selector">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
+                                <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-btn" onclick="addToCart()">ADD TO CART</button>
+            </div>
+        </div>
+
+        <!-- Care Instructions -->
+        <div class="container">
+            <div class="care-instructions">
+                <h3 class="care-title">Product Care Instructions</h3>
+                <ul class="care-list">
+                    <li>Machine wash on a medium cycle with a short spin, do not soak</li>
+                    <li>Iron at medium temperature</li>
+                    <li>Do not pour detergent or soap directly onto the product</li>
+                    <li>Do not dry under direct sunlight</li>
+                    <li>Do not bleach</li>
+                    <li>Wash with similar colors</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <div class="footer-logo">Tnagnle, Inc.</div>
+                <div class="footer-slogan">Stay inspired, stay elegant</div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <div class="contact-info">
+                    <div>Hotline: 19001999</div>
+                    <div>email for customer: custumercare@tnagnle.asia</div>
+                    <div>email for business: business@tnagnle.asia</div>
+                    <div>email for recruitment: hr-admin@tnangle.asia</div>
+                </div>
+                <div class="social-icons">
+                    <div class="social-icon">f</div>
+                    <div class="social-icon">📷</div>
+                    <div class="social-icon">▶</div>
+                    <div class="social-icon">♪</div>
+                </div>
+            </div>
+
+            <!-- Stores Section -->
+            <div class="footer-section">
+                <h3>Cửa hàng</h3>
+                <ul>
+                    <li>25 Tràng Tiền, Hoàn Kiếm, Hà Nội</li>
+                    <li>18 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+                    <li>45 Hai Bà Trưng, Quận 1, TP.HCM</li>
+                    <li>12 Lý Tự Trọng, Quận 1, TP.HCM</li>
+                    <li>89 Lạch Tray, Ngô Quyền, Hải Phòng</li>
+                </ul>
+            </div>
+
+            <!-- Support Section -->
+            <div class="footer-section">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="#">Tnagnle membership</a></li>
+                    <li><a href="#">Tài khoản</a></li>
+                    <li><a href="#">Hướng dẫn đo size</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Chính sách vận chuyển</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Hướng dẫn bảo quản</a></li>
+                </ul>
+            </div>
+
+            <!-- Expand Section -->
+            <div class="footer-section">
+                <h3>Mở rộng</h3>
+                <ul>
+                    <li><a href="#">Membership</a></li>
+                    <li><a href="#">Outfit</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Crew</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get product data from URL parameters
+        function getProductFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productName = urlParams.get('name');
+            const productPrice = urlParams.get('price');
+            const productImage = urlParams.get('image');
+            const thumbnailsParam = urlParams.get('thumbnails');
+            
+            if (productName) {
+                document.getElementById('productTitle').textContent = productName;
+            }
+            if (productPrice) {
+                document.getElementById('productPrice').textContent = productPrice;
+            }
+            if (productImage) {
+                document.getElementById('mainProductImage').src = productImage;
+            }
+            
+            // Update thumbnails if provided
+            if (thumbnailsParam) {
+                try {
+                    const thumbnails = JSON.parse(thumbnailsParam);
+                    const thumbnailElements = document.querySelectorAll('.thumbnail');
+                    thumbnailElements.forEach((thumb, index) => {
+                        if (thumbnails[index]) {
+                            thumb.src = thumbnails[index];
+                        }
+                    });
+                } catch (e) {
+                    console.log('Error parsing thumbnails:', e);
+                }
+            }
+        }
+
+        // Change main image when thumbnail is clicked
+        function changeMainImage(thumbnail) {
+            const mainImage = document.getElementById('mainProductImage');
+            mainImage.src = thumbnail.src;
+            mainImage.alt = thumbnail.alt;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+            thumbnail.classList.add('active');
+        }
+
+        // Size selection
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+
+        // Quantity controls
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue < 10) {
+                quantityInput.value = currentValue + 1;
+            }
+        }
+
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        }
+
+        // Cart Management
+        class CartManager {
+            constructor() {
+                this.cart = this.loadCart();
+                this.updateCartCount();
+            }
+
+            loadCart() {
+                const saved = localStorage.getItem('cart');
+                return saved ? JSON.parse(saved) : [];
+            }
+
+            saveCart() {
+                localStorage.setItem('cart', JSON.stringify(this.cart));
+                this.updateCartCount();
+                
+                // Trigger storage event for other tabs
+                window.dispatchEvent(new StorageEvent('storage', {
+                    key: 'cart',
+                    newValue: JSON.stringify(this.cart)
+                }));
+            }
+
+            addItem(product, color, size, quantity = 1) {
+                const existingItem = this.cart.find(item => 
+                    item.name === product.name && 
+                    item.color === color && 
+                    item.size === size
+                );
+
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    const newItem = {
+                        ...product,
+                        color: color,
+                        size: size,
+                        quantity: quantity,
+                        id: Date.now() + Math.random()
+                    };
+                    this.cart.push(newItem);
+                }
+
+                this.saveCart();
+            }
+
+            updateCartCount() {
+                const count = this.cart.reduce((total, item) => total + item.quantity, 0);
+                const cartCountElement = document.getElementById('cartCount');
+                if (cartCountElement) {
+                    cartCountElement.textContent = count;
+                    cartCountElement.style.display = count > 0 ? 'flex' : 'none';
+                }
+            }
+        }
+
+        // Initialize cart manager
+        const cartManager = new CartManager();
+
+        // Add to cart functionality
+        function addToCart() {
+            const productName = document.getElementById('productTitle').textContent;
+            const productPrice = document.getElementById('productPrice').textContent;
+            const productImage = document.getElementById('mainProductImage').src;
+            const selectedSize = document.querySelector('.size-option.selected').dataset.size;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            const product = {
+                name: productName,
+                price: productPrice,
+                image: productImage
+            };
+            
+            cartManager.addItem(product, "default", selectedSize, quantity);
+            
+            // Visual feedback
+            const addToCartBtn = document.querySelector('.add-to-cart-btn');
+            addToCartBtn.textContent = 'ADDED!';
+            addToCartBtn.style.backgroundColor = '#28a745';
+            
+            setTimeout(() => {
+                addToCartBtn.textContent = 'ADD TO CART';
+                addToCartBtn.style.backgroundColor = '#8b4513';
+            }, 2000);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            getProductFromURL();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Collection - Tnagule, Inc.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Canva Sans';
+            src: url('fonts/CanvaSans-Regular.woff2') format('woff2'),
+                 url('fonts/CanvaSans-Regular.woff') format('woff'),
+                 url('fonts/CanvaSans-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Canva Sans';
+            src: url('fonts/CanvaSans-Bold.woff2') format('woff2'),
+                 url('fonts/CanvaSans-Bold.woff') format('woff'),
+                 url('fonts/CanvaSans-Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Migra';
+            src: url('fonts/Migra-Regular.woff2') format('woff2'),
+                 url('fonts/Migra-Regular.woff') format('woff'),
+                 url('fonts/Migra-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Migra';
+            src: url('fonts/Migra-Bold.woff2') format('woff2'),
+                 url('fonts/Migra-Bold.woff') format('woff'),
+                 url('fonts/Migra-Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: rgba(250, 248, 246, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(218, 165, 132, 0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            font-style: italic;
+            color: #333;
+            text-decoration: none;
+            font-family: 'Migra', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: #8b4513;
+        }
+
+        .nav-menu li a::after {
+            content: '▼';
+            font-size: 12px;
+            margin-left: 5px;
+            opacity: 0.7;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icons .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-icons .icon:hover {
+            opacity: 1;
+        }
+
+        .nav-icons .icon {
+            position: relative;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background-color: #f5e6d3;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+        
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Collection Gallery */
+        .collection-section {
+            padding: 80px 0;
+            position: relative;
+            background-color: white;
+            min-height: 100vh;
+        }
+
+        /* Text Overlays */
+        .text-overlay {
+            position: absolute;
+            z-index: 10;
+            color: #333;
+            font-family: 'Migra', sans-serif;
+        }
+
+        .text-overlay.top-left {
+            top: 50px;
+            left: 20px;
+            max-width: 300px;
+        }
+
+        .text-overlay.top-left p {
+            font-size: 16px;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .text-overlay.top-center {
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .main-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 0.8;
+        }
+
+        .new-text {
+            font-size: 50px;
+            font-style: italic;
+           
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+        }
+
+        .collection-text {
+            font-size: 70px;
+            /* font-weight: bold; */
+           
+            margin: 20px;
+            padding: 0;
+        }
+
+        .subtitle-text {
+            font-size: 40px;
+            font-style: italic;
+            
+            font-weight: 300;
+            margin: 0;
+            padding: 0;
+        }
+
+        .text-overlay.top-right {
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            max-width: 300px;
+        }
+
+        .text-overlay.top-right p {
+            font-size: 16px;
+            line-height: 1.4;
+            margin: 0 0 15px 0;
+        }
+
+        .shop-now-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .shop-now-btn:hover {
+            background-color: #8b4513;
+        }
+
+        .collection-gallery {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 0;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+
+        .collection-thumbnail {
+            position: absolute;
+            /* border-radius: 15px; */
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            /* box-shadow: 0 8px 30px rgba(0,0,0,0.15); */
+            z-index: 1;
+        }
+
+        .collection-thumbnail:hover {
+            z-index: 5;
+            /* box-shadow: 0 12px 40px rgba(0,0,0,0.25); */
+        }
+
+        .collection-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        /* Main center image */
+        .main-image {
+            width: 350px;
+            height: 400px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        /* Side images */
+        .side-image.top-left {
+            width: 210px;
+            height: 280px;
+            left: 230px;
+            top: 160px;
+            z-index: 3;
+        }
+
+        .side-image.bottom-left {
+            width: 320px;
+            height: 180px;
+            left: -60px;
+            bottom: 210px;
+            z-index: 4;
+        }
+
+        .side-image.top-right {
+            width: 210px;
+            height: 280px;
+            right: 230px;
+            top: 160px;
+            z-index: 3;
+        }
+
+        .side-image.bottom-right {
+            width: 320px;
+            height: 180px;
+            right: -60px;
+            bottom: 210px;
+            z-index: 4;
+        }
+
+        /* Line art faces */
+        .line-art {
+            position: absolute;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .line-art.left-face {
+            left: 20px;
+            bottom: 150px;
+            width: 60px;
+            height: 80px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120"><path d="M20 60 Q30 40 50 50 Q70 40 80 60 Q70 80 50 70 Q30 80 20 60" stroke="%238b4513" stroke-width="2" fill="none"/><circle cx="35" cy="45" r="3" fill="%238b4513"/><circle cx="65" cy="45" r="3" fill="%238b4513"/><path d="M40 55 Q50 65 60 55" stroke="%238b4513" stroke-width="2" fill="none"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .line-art.right-face {
+            right: 20px;
+            bottom: 150px;
+            width: 60px;
+            height: 80px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120"><path d="M80 60 Q70 40 50 50 Q30 40 20 60 Q30 80 50 70 Q70 80 80 60" stroke="%238b4513" stroke-width="2" fill="none"/><circle cx="65" cy="45" r="3" fill="%238b4513"/><circle cx="35" cy="45" r="3" fill="%238b4513"/><path d="M60 55 Q50 65 40 55" stroke="%238b4513" stroke-width="2" fill="none"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .footer-brand {
+                align-items: center;
+            }
+
+            .brand-image {
+                width: 150px;
+                height: 45px;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .collection-section {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #F5F0EB;
+            padding: 60px 0 40px;
+            margin-top: 80px;
+            font-family: 'Canva Sans', sans-serif;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            color: #333;
+            font-family: 'Migra', serif;
+        }
+
+        .footer-logo-image {
+            margin: 10px 0;
+        }
+
+        .brand-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-image:hover {
+            transform: scale(1.02);
+        }
+
+        .footer-slogan {
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #8b4513;
+        }
+
+        .contact-info {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .contact-info div {
+            margin-bottom: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background-color: #8b4513;
+        }
+
+        .social-icon:visited {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="index.html" class="logo">Tnagule, Inc.</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="product.html">Product</a></li>
+                    <li><a href="lookbook.html">Lookbook</a></li>
+                    <li><a href="collection.html" class="active">Collection</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="nav-icons">
+                    <div class="icon">🔍</div>
+                    <a href="cart.html" class="icon">
+                        🛒
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+  
+
+    <!-- Collection Gallery Section -->
+    <section class="collection-section">
+        <div class="container">
+            <!-- Text Overlays -->
+          
+            
+            <div class="text-overlay top-center">
+                <div class="main-title">
+                    <span class="new-text"><b>new</b></span>
+                    <span class="collection-text">COLLECTION</span>
+                    <span class="subtitle-text">let's go outside</span>
+                </div>
+            </div>
+            
+          
+            
+            <div class="collection-gallery">
+                <!-- 5 ảnh xếp thứ tự như trong hình -->
+                <div class="collection-thumbnail main-image" data-index="0">
+                    <img src="images/products/1.png" alt="Main Model">
+                </div>
+                
+                <div class="collection-thumbnail side-image top-left" data-index="1">
+                    <img src="images/products/2.png" alt="Model 1">
+                </div>
+                
+                <div class="collection-thumbnail side-image bottom-left" data-index="2">
+                    <img src="images/products/3.png" alt="Model 2">
+                </div>
+                
+                <div class="collection-thumbnail side-image top-right" data-index="3">
+                    <img src="images/products/4.png" alt="Model 3">
+                </div>
+                
+                <div class="collection-thumbnail side-image bottom-right" data-index="4">
+                    <img src="images/products/5.jpg" alt="Model 4">
+                </div>
+                
+                <!-- Abstract line art faces -->
+               
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '100%';
+                navMenu.style.left = '0';
+                navMenu.style.right = '0';
+                navMenu.style.backgroundColor = '#e8e4e1';
+                navMenu.style.padding = '20px';
+                navMenu.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            console.log('Collection page - Cart count:', count, 'Cart items:', cart);
+            
+            const cartCountElement = document.getElementById('cartCount');
+            if (cartCountElement) {
+                cartCountElement.textContent = count;
+                cartCountElement.style.display = count > 0 ? 'flex' : 'none';
+            }
+        }
+
+        // Initialize cart count
+        updateCartCount();
+
+        // Listen for cart updates
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'cart') {
+                updateCartCount();
+            }
+        });
+
+        // Collection Gallery Auto-rotation
+        document.addEventListener('DOMContentLoaded', function() {
+            const thumbnails = document.querySelectorAll('.collection-thumbnail');
+            const images = [
+                'images/products/1.png',
+                'images/products/2.png', 
+                'images/products/3.png',
+                'images/products/4.png',
+                'images/products/5.jpg'
+            ];
+            
+            let currentIndex = 0;
+            let autoSlideInterval;
+            
+            function rotateImages() {
+                // Fade out all images
+                thumbnails.forEach(thumbnail => {
+                    thumbnail.style.opacity = '0.3';
+                });
+                
+                setTimeout(() => {
+                    // Rotate images clockwise
+                    const tempImages = [...images];
+                    const rotatedImages = tempImages.slice(1).concat(tempImages[0]);
+                    
+                    thumbnails.forEach((thumbnail, index) => {
+                        const img = thumbnail.querySelector('img');
+                        img.src = rotatedImages[index];
+                        thumbnail.style.opacity = '1';
+                    });
+                    
+                    // Update images array
+                    images.splice(0, images.length, ...rotatedImages);
+                }, 300);
+            }
+            
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(rotateImages, 3000); // 5 seconds
+            }
+            
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+            
+            // Click event listeners for manual rotation
+            thumbnails.forEach((thumbnail, index) => {
+                thumbnail.addEventListener('click', function() {
+                    stopAutoSlide();
+                    rotateImages();
+                    
+                    // Restart auto-slide after 10 seconds
+                    setTimeout(() => {
+                        startAutoSlide();
+                    }, 10000);
+                });
+            });
+            
+            // Pause auto-slide on hover
+            const gallery = document.querySelector('.collection-gallery');
+            gallery.addEventListener('mouseenter', stopAutoSlide);
+            gallery.addEventListener('mouseleave', startAutoSlide);
+            
+            // Start auto-slide
+            startAutoSlide();
+
+            // Contact scroll to footer
+            const contactLinks = document.querySelectorAll('a[href="#contact"]');
+            contactLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const footer = document.querySelector('.footer');
+                    if (footer) {
+                        footer.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <div class="footer-logo">Tnagnle, Inc.</div>
+                <div class="footer-slogan">Stay inspired, stay elegant</div>
+                <div class="footer-logo-image">
+                    <img src="images/products/6.png" alt="Tnagnle Brand Image" class="brand-image">
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <div class="contact-info">
+                    <div>Hotline: 19001999</div>
+                    <div>email for customer: custumercare@tnagnle.asia</div>
+                    <div>email for business: business@tnagnle.asia</div>
+                    <div>email for recruitment: hr-admin@tnangle.asia</div>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/natalia.lynne.33" target="_blank" class="social-icon">f</a>
+                    <div class="social-icon">📷</div>
+                    <div class="social-icon">▶</div>
+                    <div class="social-icon">♪</div>
+                </div>
+            </div>
+
+            <!-- Stores Section -->
+            <div class="footer-section">
+                <h3>Cửa hàng</h3>
+                <ul>
+                    <li>25 Tràng Tiền, Hoàn Kiếm, Hà Nội</li>
+                    <li>18 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+                    <li>45 Hai Bà Trưng, Quận 1, TP.HCM</li>
+                    <li>12 Lý Tự Trọng, Quận 1, TP.HCM</li>
+                    <li>89 Lạch Tray, Ngô Quyền, Hải Phòng</li>
+                </ul>
+            </div>
+
+            <!-- Support Section -->
+            <div class="footer-section">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="#">Tnagnle membership</a></li>
+                    <li><a href="#">Tài khoản</a></li>
+                    <li><a href="#">Hướng dẫn đo size</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Chính sách vận chuyển</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Hướng dẫn bảo quản</a></li>
+                </ul>
+            </div>
+
+            <!-- Expand Section -->
+            <div class="footer-section">
+                <h3>Mở rộng</h3>
+                <ul>
+                    <li><a href="#">Membership</a></li>
+                    <li><a href="#">Outfit</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Crew</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Tnagule, Inc.</title>
+    <style>
+        @font-face {
+            font-family: 'Canva Sans';
+            src: url('fonts/CanvaSans-Regular.woff2') format('woff2'),
+                 url('fonts/CanvaSans-Regular.woff') format('woff'),
+                 url('fonts/CanvaSans-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Canva Sans';
+            src: url('fonts/CanvaSans-Bold.woff2') format('woff2'),
+                 url('fonts/CanvaSans-Bold.woff') format('woff'),
+                 url('fonts/CanvaSans-Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Migra';
+            src: url('fonts/Migra-Regular.woff2') format('woff2'),
+                 url('fonts/Migra-Regular.woff') format('woff'),
+                 url('fonts/Migra-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Migra';
+            src: url('fonts/Migra-Bold.woff2') format('woff2'),
+                 url('fonts/Migra-Bold.woff') format('woff'),
+                 url('fonts/Migra-Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #e8e4e1;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            font-style: italic;
+            color: #333;
+            text-decoration: none;
+            font-family: 'Migra', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: #8b4513;
+        }
+
+        .nav-menu li a::after {
+            content: '▼';
+            font-size: 12px;
+            margin-left: 5px;
+            opacity: 0.7;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icons .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-icons .icon:hover {
+            opacity: 1;
+        }
+
+        .nav-icons .icon {
+            position: relative;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #8b4513;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background-image: url('images/products/thanhngang.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* background-color: rgba(245, 230, 211, 0.7); */
+            z-index: 1;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Search Dropdown */
+        .search-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 15px;
+            min-width: 300px;
+            z-index: 1000;
+            display: none;
+            border: 1px solid #e0e0e0;
+        }
+
+        .search-dropdown.show {
+            display: block;
+        }
+
+        .search-bar {
+            display: flex;
+            background-color: #f8f8f8;
+            border-radius: 25px;
+            padding: 5px;
+            border: 2px solid #e0e0e0;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-bar:focus-within {
+            border-color: #8b4513;
+        }
+
+        #searchInput {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            background: transparent;
+        }
+
+        #searchInput::placeholder {
+            color: #999;
+        }
+
+        #searchBtn {
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        #searchBtn:hover {
+            background-color: #6d3410;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #F5F0EB;
+            padding: 60px 0 40px;
+            margin-top: 80px;
+            font-family: 'Canva Sans', sans-serif;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            color: #333;
+            font-family: 'Migra', serif;
+        }
+
+        .footer-slogan {
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .footer-logo-image {
+            margin: 10px 0;
+        }
+
+        .brand-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-image:hover {
+            transform: scale(1.02);
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #8b4513;
+        }
+
+        .contact-info {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .contact-info div {
+            margin-bottom: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background-color: #8b4513;
+        }
+
+        .social-icon:visited {
+            color: white;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Product Section */
+        .product-section {
+            background-color: white;
+            padding: 80px 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-image-container .heart-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255,255,255,0.9);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .product-card:hover .heart-icon {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .heart-icon:hover {
+            background-color: #ff6b6b;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #8b4513;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .product-badge:contains("NEW") {
+            background-color: #28a745;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Georgia', serif;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+        }
+
+        .product-separator {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+
+        .size-selection {
+            margin-bottom: 20px;
+        }
+
+        .size-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 8px;
+        }
+
+        .size-option {
+            padding: 6px 12px;
+            border: 1px solid #e0e0e0;
+            background-color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .size-option.selected {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        .size-option:hover {
+            border-color: #333;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #6d3410;
+            transform: translateY(-1px);
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs-section {
+            background-color: #faf8f5;
+            padding: 40px 0;
+            border-bottom: 1px solid #f0e8e0;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 50px;
+            padding: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab {
+            background-color: transparent;
+            border: none;
+            padding: 16px 32px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border-radius: 50px;
+            z-index: 2;
+            flex: 1;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .nav-tab:hover {
+            color: #333;
+            background-color: rgba(245, 230, 211, 0.3);
+        }
+
+        .nav-tab.active {
+            color: #333;
+            background-color: #f5e6d3;
+            box-shadow: 0 2px 10px rgba(245, 230, 211, 0.4);
+            transform: scale(1.02);
+        }
+
+        .nav-tab.active:hover {
+            background-color: #f0e0c9;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background-color: #f5f5f5;
+            padding: 50px 0;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .filter-btn {
+            background-color: white;
+            border: 1px solid #d0d0d0;
+            padding: 14px 28px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            color: #666;
+            min-width: 100px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+
+        .filter-btn:hover {
+            background-color: #f8f8f8;
+            border-color: #999;
+            color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .filter-btn.active {
+            background-color: #f5e6d3;
+            color: #333;
+            border-color: #f5e6d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(245, 230, 211, 0.4);
+        }
+
+        .filter-btn.active::before {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .product-section {
+                padding: 40px 0;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 0 20px;
+            }
+
+            .product-image {
+                height: 250px;
+            }
+
+            .product-info {
+                padding: 15px;
+            }
+
+            .product-name {
+                font-size: 16px;
+            }
+
+            .product-price {
+                font-size: 14px;
+            }
+
+            .filter-container {
+                gap: 12px;
+                padding: 0 20px;
+            }
+
+            .filter-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+                min-width: 80px;
+            }
+
+            .nav-tabs-section {
+                padding: 30px 0;
+            }
+
+            .nav-tabs {
+                max-width: 400px;
+                padding: 4px;
+            }
+
+            .nav-tab {
+                padding: 14px 24px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .footer-brand {
+                align-items: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .product-image {
+                height: 220px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .filter-section {
+                padding: 30px 0;
+            }
+
+            .filter-container {
+                gap: 8px;
+                padding: 0 15px;
+            }
+
+            .filter-btn {
+                padding: 10px 16px;
+                font-size: 13px;
+                min-width: 70px;
+            }
+
+            .nav-tabs-section {
+                padding: 20px 0;
+            }
+
+            .nav-tabs {
+                max-width: 320px;
+                margin: 0 20px;
+                padding: 3px;
+            }
+
+            .nav-tab {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+        .product-card:nth-child(5) { animation-delay: 0.5s; }
+        .product-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="index.html" class="logo">Tnagule, Inc.</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="product.html" class="active">Product</a></li>
+                    <li><a href="lookbook.html">Lookbook</a></li>
+                    <li><a href="collection.html">Collection</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="nav-icons">
+                    <div class="icon">🔍</div>
+                    <a href="cart.html" class="icon">
+                        🛒
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">New Collection is live now</h1>
+        </div>
+    </section>
+    
+    <!-- Search Dropdown -->
+    <div class="search-dropdown" id="searchDropdown">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products..." />
+            <button id="searchBtn">🔍</button>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <section class="nav-tabs-section">
+        <div class="container">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="all">All Products</button>
+                <button class="nav-tab" data-tab="bestseller">Best Seller</button>
+                <button class="nav-tab" data-tab="newarrival">New Arrival</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section" id="filterSection">
+        <div class="container">
+            <div class="filter-container">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Clothes</button>
+                <button class="filter-btn">Hats</button>
+                <button class="filter-btn">Glasses</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="product-section">
+        <div class="container">
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be dynamically generated here -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Product data
+        const productsData = {
+            all: [
+                // Clothes
+                { name: "White Shirt", price: "$50.00", image: "images/products/white-shirt.jpg", category: "clothes", thumbnails: ["images/products/white-shirt.jpg", "images/products/white-shirt2.jpg", "images/products/white-shirt3.jpg"] },
+                { name: "White Blazer", price: "$50.00", image: "images/products/white-blazer.jpg", category: "clothes", thumbnails: ["images/products/white-blazer.jpg", "images/products/white-blazer2.jpg", "images/products/white-blazer3.jpg"] },
+                { name: "White Dress", price: "$50.00", image: "images/products/white-dress.jpg", category: "clothes", thumbnails: ["images/products/white-dress.jpg", "images/products/white-dress2.jpg", "images/products/white-dress3.jpg"] },
+                { name: "White Trouser", price: "$50.00", image: "images/products/white-trouser.jpg", category: "clothes", thumbnails: ["images/products/white-trouser.jpg", "images/products/white-trouser2.jpg", "images/products/white-trouser3.jpg"] },
+                { name: "White Shirt 2", price: "$50.00", image: "images/products/white-shirt2.jpg", category: "clothes", thumbnails: ["images/products/white-shirt2.jpg", "images/products/white-shirt2-2.jpg", "images/products/white-shirt2-3.jpg"] },
+                { name: "White Casual Shirt", price: "$120.00", image: "images/products/white-casual-shirt.jpg", category: "clothes", thumbnails: ["images/products/white-casual-shirt.jpg", "images/products/white-casual-shirt2.jpg", "images/products/white-casual-shirt3.jpg"] },
+                { name: "Beige Shirt", price: "$80.00", image: "images/products/beige-shirt.jpg", category: "clothes", thumbnails: ["images/products/beige-shirt.jpg", "images/products/beige-shirt2.jpg", "images/products/beige-shirt3.jpg"] },
+                
+                // Hats
+                { name: "White Hat", price: "$345.00", image: "images/products/hat.jpg", category: "hats", thumbnails: ["images/products/hat.jpg", "images/products/hat-2.jpg", "images/products/hat-3.jpg"] },
+                { name: "Black Hat", price: "$345.00", image: "images/products/hatt.jpg", category: "hats", thumbnails: ["images/products/hatt.jpg", "images/products/hatt-2.jpg", "images/products/hatt-3.jpg"] },
+                { name: "Brown Hat", price: "$345.00", image: "images/products/hattt.jpg", category: "hats", thumbnails: ["images/products/hattt.jpg", "images/products/hattt-2.jpg", "images/products/hattt-3.jpg"] },
+                { name: "Beige Hat", price: "$345.00", image: "images/products/hatttt.jpg", category: "hats", thumbnails: ["images/products/hatttt.jpg", "images/products/hatttt-2.jpg", "images/products/hatttt-3.jpg"] },
+                
+                // Glasses
+                { name: "GLS1", price: "$80.00", image: "images/products/glasses1.jpg", category: "glasses", thumbnails: ["images/products/glasses1.jpg", "images/products/glasses1-2.jpg", "images/products/glasses1-3.jpg"] },
+                { name: "GLS2", price: "$80.00", image: "images/products/glasses2.jpg", category: "glasses", thumbnails: ["images/products/glasses2.jpg", "images/products/glasses2-2.jpg", "images/products/glasses2-3.jpg"] },
+                { name: "GLS3", price: "$80.00", image: "images/products/glasses3.jpg", category: "glasses", thumbnails: ["images/products/glasses3.jpg", "images/products/glasses3-2.jpg", "images/products/glasses3-3.jpg"] },
+                
+                // New Arrivals
+                
+            ],
+            clothes: [
+                { name: "White Shirt", price: "$50.00", image: "images/products/white-shirt.jpg", category: "clothes", thumbnails: ["images/products/white-shirt.jpg", "images/products/white-shirt2.jpg", "images/products/white-shirt3.jpg"] },
+                { name: "White Blazer", price: "$50.00", image: "images/products/white-blazer.jpg", category: "clothes", thumbnails: ["images/products/white-blazer.jpg", "images/products/white-blazer2.jpg", "images/products/white-blazer3.jpg"] },
+                { name: "White Dress", price: "$50.00", image: "images/products/white-dress.jpg", category: "clothes", thumbnails: ["images/products/white-dress.jpg", "images/products/white-dress2.jpg", "images/products/white-dress3.jpg"] },
+                { name: "White Trouser", price: "$50.00", image: "images/products/white-trouser.jpg", category: "clothes", thumbnails: ["images/products/white-trouser.jpg", "images/products/white-trouser2.jpg", "images/products/white-trouser3.jpg"] },
+                
+            ],
+            hats: [
+                { name: "White Hat", price: "$345.00", image: "images/products/hat.jpg", category: "hats", thumbnails: ["images/products/hat.jpg", "images/products/hat-2.jpg", "images/products/hat-3.jpg"] },
+                { name: "Black Hat", price: "$345.00", image: "images/products/hatt.jpg", category: "hats", thumbnails: ["images/products/hatt.jpg", "images/products/hatt-2.jpg", "images/products/hatt-3.jpg"] },
+                { name: "Brown Hat", price: "$345.00", image: "images/products/hattt.jpg", category: "hats", thumbnails: ["images/products/hattt.jpg", "images/products/hattt-2.jpg", "images/products/hattt-3.jpg"] },
+                { name: "Beige Hat", price: "$345.00", image: "images/products/hatttt.jpg", category: "hats", thumbnails: ["images/products/hatttt.jpg", "images/products/hatttt-2.jpg", "images/products/hatttt-3.jpg"] },
+                
+            ],
+            glasses: [
+                { name: "GLS1", price: "$80.00", image: "images/products/glasses1.jpg", category: "glasses", thumbnails: ["images/products/glasses1.jpg", "images/products/glasses1-2.jpg", "images/products/glasses1-3.jpg"] },
+                { name: "GLS2", price: "$80.00", image: "images/products/glasses2.jpg", category: "glasses", thumbnails: ["images/products/glasses2.jpg", "images/products/glasses2-2.jpg", "images/products/glasses2-3.jpg"] },
+                { name: "GLS3", price: "$80.00", image: "images/products/glasses3.jpg", category: "glasses", thumbnails: ["images/products/glasses3.jpg", "images/products/glasses3-2.jpg", "images/products/glasses3-3.jpg"] },
+               
+            ],
+            bestseller: [
+                { name: "White Hat", price: "$345.00", image: "images/products/hat.jpg", category: "hats", badge: "BEST SELLER", thumbnails: ["images/products/hat.jpg", "images/products/hat-2.jpg", "images/products/hat-3.jpg"] },
+                { name: "White Shirt", price: "$50.00", image: "images/products/white-shirt.jpg", category: "clothes", badge: "BEST SELLER", thumbnails: ["images/products/white-shirt.jpg", "images/products/white-shirt2.jpg", "images/products/white-shirt3.jpg"] },
+                { name: "GLS1", price: "$80.00", image: "images/products/glasses1.jpg", category: "glasses", badge: "BEST SELLER", thumbnails: ["images/products/glasses1.jpg", "images/products/glasses1-2.jpg", "images/products/glasses1-3.jpg"] },
+                { name: "White Dress", price: "$345.00", image: "images/products/white-dress2.jpg", category: "hats", badge: "BEST SELLER", thumbnails: ["images/products/white-dress2.jpg", "images/products/white-dress2-2.jpg", "images/products/white-dress2-3.jpg"] },
+                { name: "Black Hat", price: "$345.00", image: "images/products/hatt.jpg", category: "hats", badge: "BEST SELLER", thumbnails: ["images/products/hatt.jpg", "images/products/hatt-2.jpg", "images/products/hatt-3.jpg"] },
+                { name: "White Blazer", price: "$50.00", image: "images/products/white-blazer.jpg", category: "clothes", badge: "BEST SELLER", thumbnails: ["images/products/white-blazer.jpg", "images/products/white-blazer2.jpg", "images/products/white-blazer3.jpg"] },
+                { name: "GLS2", price: "$80.00", image: "images/products/glasses2.jpg", category: "glasses", badge: "BEST SELLER", thumbnails: ["images/products/glasses2.jpg", "images/products/glasses2-2.jpg", "images/products/glasses2-3.jpg"] },
+                { name: "White Shirt 2", price: "$50.00", image: "images/products/white-shirtt.jpg", category: "clothes", badge: "BEST SELLER", thumbnails: ["images/products/white-shirtt.jpg", "images/products/white-shirtt-2.jpg", "images/products/white-shirtt-3.jpg"] }
+            ],
+            newarrival: [
+                { name: "White Dress", price: "$345.00", image: "images/products/white-dresss.jpg", category: "hats", badge: "NEW", thumbnails: ["images/products/white-dresss.jpg", "images/products/white-dresss-2.jpg", "images/products/white-dresss-3.jpg"] },
+                { name: "White Shirt", price: "$50.00", image: "images/products/white-shirtt.jpg", category: "clothes", badge: "NEW", thumbnails: ["images/products/white-shirtt.jpg", "images/products/white-shirtt-2.jpg", "images/products/white-shirtt-3.jpg"] },
+                { name: "White Casual Shirt", price: "$120.00", image: "images/products/white-casual-shirt.jpg", category: "shoes", badge: "NEW", thumbnails: ["images/products/white-casual-shirt.jpg", "images/products/white-casual-shirt2.jpg", "images/products/white-casual-shirt3.jpg"] },
+                { name: "Beige Shirt", price: "$80.00", image: "images/products/beige-shirt.jpg", category: "glasses", badge: "NEW", thumbnails: ["images/products/beige-shirt.jpg", "images/products/beige-shirt2.jpg", "images/products/beige-shirt3.jpg"] },
+            ]
+        };
+
+        // Function to create product card HTML
+        function createProductCard(product) {
+            const badgeHtml = product.badge ? `<div class="product-badge">${product.badge}</div>` : '';
+            const thumbnails = product.thumbnails || [product.image, product.image, product.image];
+            const thumbnailsStr = JSON.stringify(thumbnails).replace(/"/g, '&quot;');
+            return `
+                <div class="product-card" data-category="${product.category}" onclick="goToProductDetail('${product.name}', '${product.price}', '${product.image}', '${thumbnailsStr}')">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="heart-icon">♡</div>
+                        ${badgeHtml}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-price">${product.price}</p>
+                        </div>
+                        <div class="product-separator"></div>
+                        
+                        
+                        <div class="size-selection">
+                            <span class="size-label">Size</span>
+                            <div class="size-options">
+                                <div class="size-option selected" data-size="S">S</div>
+                                <div class="size-option" data-size="M">M</div>
+                                <div class="size-option" data-size="L">L</div>
+                            </div>
+                        </div>
+                        
+                        <button class="add-to-cart-btn">ADD TO CART</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to render products
+        function renderProducts(category) {
+            const productGrid = document.getElementById('productGrid');
+            const products = productsData[category] || productsData.all;
+            
+            productGrid.innerHTML = products.map(product => createProductCard(product)).join('');
+            
+            // Re-attach event listeners
+            attachEventListeners();
+        }
+
+        // Function to attach event listeners
+        function attachEventListeners() {
+            // Heart icon functionality
+            document.querySelectorAll('.heart-icon').forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.style.backgroundColor = this.style.backgroundColor === 'rgb(255, 107, 107)' ? 'rgba(255,255,255,0.9)' : '#ff6b6b';
+                    this.style.color = this.style.color === 'white' ? '#333' : 'white';
+                });
+            });
+
+
+            // Size selection functionality
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    productCard.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            // Add to cart functionality
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Prevent double click
+                    if (this.disabled) return;
+                    this.disabled = true;
+                    
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-name').textContent;
+                    const productPrice = productCard.querySelector('.product-price').textContent;
+                    const productImage = productCard.querySelector('.product-image').src;
+                    const selectedSize = productCard.querySelector('.size-option.selected').dataset.size;
+                    
+                    const product = {
+                        name: productName,
+                        price: productPrice,
+                        image: productImage
+                    };
+                    
+                    cartManager.addItem(product, "default", selectedSize);
+                    
+                    // Visual feedback
+                    this.textContent = 'ADDED!';
+                    this.style.backgroundColor = '#28a745';
+                    
+                    setTimeout(() => {
+                        this.textContent = 'ADD TO CART';
+                        this.style.backgroundColor = '#8b4513';
+                        this.disabled = false;
+                    }, 2000);
+                });
+            });
+        }
+
+        // Cart management
+        class CartManager {
+            constructor() {
+                this.cart = this.loadCart();
+                this.updateCartCount();
+            }
+
+            loadCart() {
+                const saved = localStorage.getItem('cart');
+                return saved ? JSON.parse(saved) : [];
+            }
+
+            saveCart() {
+                localStorage.setItem('cart', JSON.stringify(this.cart));
+                this.updateCartCount();
+                
+                // Trigger storage event for other tabs
+                window.dispatchEvent(new StorageEvent('storage', {
+                    key: 'cart',
+                    newValue: JSON.stringify(this.cart)
+                }));
+            }
+
+            addItem(product, color, size, quantity = 1) {
+                const existingItem = this.cart.find(item => 
+                    item.name === product.name && 
+                    item.color === color && 
+                    item.size === size
+                );
+
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    const newItem = {
+                        ...product,
+                        color: color,
+                        size: size,
+                        quantity: quantity,
+                        id: Date.now() + Math.random()
+                    };
+                    this.cart.push(newItem);
+                }
+
+                this.saveCart();
+            }
+
+            updateCartCount() {
+                const count = this.cart.reduce((total, item) => total + item.quantity, 0);
+                const cartCountElement = document.getElementById('cartCount');
+                if (cartCountElement) {
+                    cartCountElement.textContent = count;
+                    cartCountElement.style.display = count > 0 ? 'flex' : 'none';
+                }
+            }
+        }
+
+        // Initialize cart manager
+        const cartManager = new CartManager();
+
+        // Search functionality
+        function initializeSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            const searchDropdown = document.getElementById('searchDropdown');
+            const headerSearchIcon = document.querySelector('.header .icon');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                // If we're on product page, filter products
+                const productCards = document.querySelectorAll('.product-card');
+                if (productCards.length > 0) {
+                    if (searchTerm === '') {
+                        // Show all products
+                        productCards.forEach(card => {
+                            card.style.display = 'block';
+                        });
+                    } else {
+                        // Filter products
+                        productCards.forEach(card => {
+                            const productName = card.querySelector('.product-name').textContent.toLowerCase();
+                            const productCategory = card.dataset.category || '';
+                            
+                            if (productName.includes(searchTerm) || productCategory.includes(searchTerm)) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+                } else {
+                    // If not on product page, redirect to product page with search term
+                    if (searchTerm) {
+                        window.location.href = `product.html?search=${encodeURIComponent(searchTerm)}`;
+                    }
+                }
+            }
+            
+            function toggleSearch() {
+                searchDropdown.classList.toggle('show');
+                if (searchDropdown.classList.contains('show')) {
+                    searchInput.focus();
+                }
+            }
+            
+            // Toggle search when clicking header search icon
+            if (headerSearchIcon) {
+                headerSearchIcon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleSearch();
+                });
+            }
+            
+            // Search on input
+            if (searchInput) {
+                searchInput.addEventListener('input', performSearch);
+            }
+            
+            // Search on button click
+            if (searchBtn) {
+                searchBtn.addEventListener('click', performSearch);
+            }
+            
+            // Search on Enter key
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+            }
+            
+            // Close search when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchDropdown.contains(e.target) && !headerSearchIcon.contains(e.target)) {
+                    searchDropdown.classList.remove('show');
+                }
+            });
+        }
+
+        // Function to go to product detail page
+        function goToProductDetail(name, price, image, thumbnailsStr) {
+            const params = new URLSearchParams({
+                name: name,
+                price: price,
+                image: image,
+                thumbnails: thumbnailsStr
+            });
+            window.location.href = `product-detail.html?${params.toString()}`;
+        }
+
+
+
+        // Simple mobile menu toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Navigation tabs functionality
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Get tab category
+                const tabCategory = this.dataset.tab;
+                
+                // Show/hide filter section based on tab
+                const filterSection = document.getElementById('filterSection');
+                if (tabCategory === 'all') {
+                    filterSection.style.display = 'block';
+                } else {
+                    filterSection.style.display = 'none';
+                }
+                
+                // Render products for selected tab
+                renderProducts(tabCategory);
+                
+                console.log('Tab clicked:', tabCategory);
+            });
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Only work when "All Products" tab is active
+                const activeTab = document.querySelector('.nav-tab.active');
+                if (activeTab.dataset.tab !== 'all') return;
+                
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get filter category
+                const filterText = this.textContent.toLowerCase();
+                let category = 'all';
+                
+                if (filterText === 'clothes') category = 'clothes';
+                else if (filterText === 'hats') category = 'hats';
+                else if (filterText === 'shoes') category = 'shoes';
+                else if (filterText === 'glasses') category = 'glasses';
+                
+                // Render products for selected category
+                renderProducts(category);
+                
+                console.log('Filter clicked:', filterText, 'Category:', category);
+            });
+        });
+
+        // Initialize with "All" products
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts('all');
+            initializeSearch();
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(232, 228, 225, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.backgroundColor = '#e8e4e1';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Contact scroll to footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactLinks = document.querySelectorAll('a[href="#contact"]');
+            contactLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const footer = document.querySelector('.footer');
+                    if (footer) {
+                        footer.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <div class="footer-logo">Tnagnle, Inc.</div>
+                <div class="footer-slogan">Stay inspired, stay elegant</div>
+                <div class="footer-logo-image">
+                    <img src="images/products/6.png" alt="Tnagnle Brand Image" class="brand-image">
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <div class="contact-info">
+                    <div>Hotline: 19001999</div>
+                    <div>email for customer: custumercare@tnagnle.asia</div>
+                    <div>email for business: business@tnagnle.asia</div>
+                    <div>email for recruitment: hr-admin@tnangle.asia</div>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/natalia.lynne.33" target="_blank" class="social-icon">f</a>
+                    <div class="social-icon">📷</div>
+                    <div class="social-icon">▶</div>
+                    <div class="social-icon">♪</div>
+                </div>
+            </div>
+
+            <!-- Stores Section -->
+            <div class="footer-section">
+                <h3>Cửa hàng</h3>
+                <ul>
+                    <li>25 Tràng Tiền, Hoàn Kiếm, Hà Nội</li>
+                    <li>18 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+                    <li>45 Hai Bà Trưng, Quận 1, TP.HCM</li>
+                    <li>12 Lý Tự Trọng, Quận 1, TP.HCM</li>
+                    <li>89 Lạch Tray, Ngô Quyền, Hải Phòng</li>
+                </ul>
+            </div>
+
+            <!-- Support Section -->
+            <div class="footer-section">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="#">Tnagnle membership</a></li>
+                    <li><a href="#">Tài khoản</a></li>
+                    <li><a href="#">Hướng dẫn đo size</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Chính sách vận chuyển</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Hướng dẫn bảo quản</a></li>
+                </ul>
+            </div>
+
+            <!-- Expand Section -->
+            <div class="footer-section">
+                <h3>Mở rộng</h3>
+                <ul>
+                    <li><a href="#">Membership</a></li>
+                    <li><a href="#">Outfit</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Crew</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

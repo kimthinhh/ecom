@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tuaynle, Inc.</title>
+    <style>
+        @font-face {
+            font-family: 'Canva Sans';
+            src: url('fonts/CanvaSans-Regular.woff2') format('woff2'),
+                 url('fonts/CanvaSans-Regular.woff') format('woff'),
+                 url('fonts/CanvaSans-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Canva Sans';
+            src: url('fonts/CanvaSans-Bold.woff2') format('woff2'),
+                 url('fonts/CanvaSans-Bold.woff') format('woff'),
+                 url('fonts/CanvaSans-Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Migra';
+            src: url('fonts/Migra-Regular.woff2') format('woff2'),
+                 url('fonts/Migra-Regular.woff') format('woff'),
+                 url('fonts/Migra-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Migra';
+            src: url('fonts/Migra-Bold.woff2') format('woff2'),
+                 url('fonts/Migra-Bold.woff') format('woff'),
+                 url('fonts/Migra-Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #faf8f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background-color: rgba(250, 248, 246, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(218, 165, 132, 0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            font-style: italic;
+            color: #333;
+            text-decoration: none;
+            font-family: 'Migra', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: #8b4513;
+        }
+
+        .nav-menu li a::after {
+            content: '▼';
+            font-size: 12px;
+            margin-left: 5px;
+            opacity: 0.7;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icons .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-icons .icon:hover {
+            opacity: 1;
+        }
+
+        .nav-icons .icon {
+            position: relative;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 60px;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* About Us Section */
+        .about-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-header h1 {
+            font-size: 28px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #8B4513;
+            margin-bottom: 30px;
+            font-weight: 400;
+            font-family: 'Canva Sans', sans-serif;
+        }
+
+        .about-header h2 {
+            font-size: 24px;
+            line-height: 1.4;
+            color: #333;
+            font-style: italic;
+            font-weight: bold;
+            max-width: 1000px;
+            margin: 0 auto;
+            word-spacing: 3px;
+            letter-spacing: 0.8px;
+            font-family: 'Migra', serif;
+        }
+
+        /* Content Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 640px;
+            height: 360px;
+            object-fit: cover;
+           
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #F5F0EB;
+            padding: 60px 0 40px;
+            margin-top: 80px;
+            font-family: 'Canva Sans', sans-serif;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            color: #333;
+            font-family: 'Migra', serif;
+        }
+
+        .footer-slogan {
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .footer-logo-image {
+            margin: 10px 0;
+        }
+
+        .brand-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-image:hover {
+            transform: scale(1.02);
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #8b4513;
+        }
+
+        .contact-info {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .contact-info div {
+            margin-bottom: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background-color: #8b4513;
+        }
+
+        .social-icon:visited {
+            color: white;
+        }
+
+        .about-text {
+            padding-left: 40px;
+        }
+
+        .about-text h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+            font-family: 'Canva Sans', sans-serif;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #666;
+            text-align: justify;
+            font-family: 'Canva Sans', sans-serif;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .about-header h2 {
+                font-size: 22px;
+                padding: 0 20px;
+                word-spacing: 2px;
+                letter-spacing: 0.5px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-text {
+                padding-left: 0;
+                text-align: center;
+            }
+
+            .about-image img {
+                height: 400px;
+            }
+
+            main {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .about-header h1 {
+                font-size: 12px;
+            }
+
+            .about-header h2 {
+                font-size: 18px;
+                word-spacing: 1.5px;
+                letter-spacing: 0.3px;
+                line-height: 1.5;
+            }
+
+            .about-text h3 {
+                font-size: 16px;
+            }
+
+            .about-text p {
+                font-size: 14px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .footer-brand {
+                align-items: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="index.html" class="logo">Tnagule, Inc.</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="product.html">Product</a></li>
+                    <li><a href="lookbook.html">Lookbook</a></li>
+                    <li><a href="collection.html">Collection</a></li>
+                    <li><a href="about.html" class="active">About us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="nav-icons">
+                    <div class="icon">🔍</div>
+                    <a href="cart.html" class="icon">
+                        🛒
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- About Us Header -->
+            <section class="about-header">
+                <h1>ABOUT US</h1>
+                <h2>To become the leading destination for timeless white luxury fashion,<br>empowering women to embrace elegance and confidence in every moment</h2>
+            </section>
+
+            <!-- About Content -->
+            <section class="about-content">
+                <div class="about-image">
+                    <img src="images/about/about-hero.png" alt="Elegant woman in white luxury fashion" onerror="this.src='https://images.unsplash.com/photo-1594736797933-d0f3c3d7eba3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <div class="about-text">
+                    <h3>Since 2006</h3>
+                    <p>We are a luxury women's fashion boutique where white takes center stage — symbolizing purity, elegance, and timeless beauty. Born from a passion for refined simplicity, we craft each piece to inspire confidence and celebrate femininity. Guided by the motto "Stay Inspired, Stay Elegant", we are committed to offering high-quality designs and a personalized experience that honor every woman's unique charm.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+
+        // Update cart count
+        function updateCartCount() {
+            const cartData = localStorage.getItem('cart');
+            const cartCount = document.getElementById('cartCount');
+            
+            if (cartData) {
+                const cart = JSON.parse(cartData);
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                console.log('About page - Cart count:', totalItems, 'Cart items:', cart);
+                
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            } else {
+                console.log('About page - No cart data found');
+                cartCount.style.display = 'none';
+            }
+        }
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+
+        // Listen for storage changes (when cart is updated on other pages)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'cart') {
+                updateCartCount();
+            }
+        });
+
+        // Hamburger menu functionality
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '100%';
+                navMenu.style.left = '0';
+                navMenu.style.right = '0';
+                navMenu.style.backgroundColor = 'rgba(250, 248, 246, 0.98)';
+                navMenu.style.padding = '20px';
+                navMenu.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                navMenu.style.zIndex = '1000';
+            }
+        });
+
+        // Contact scroll to footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactLinks = document.querySelectorAll('a[href="#contact"]');
+            contactLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const footer = document.querySelector('.footer');
+                    if (footer) {
+                        footer.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <div class="footer-logo">Tnagnle, Inc.</div>
+                <div class="footer-slogan">Stay inspired, stay elegant</div>
+                <div class="footer-logo-image">
+                    <img src="images/products/6.png" alt="Tnagnle Brand Image" class="brand-image">
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <div class="contact-info">
+                    <div>Hotline: 19001999</div>
+                    <div>email for customer: custumercare@tnagnle.asia</div>
+                    <div>email for business: business@tnagnle.asia</div>
+                    <div>email for recruitment: hr-admin@tnangle.asia</div>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/natalia.lynne.33" target="_blank" class="social-icon">f</a>
+                    <div class="social-icon">📷</div>
+                    <div class="social-icon">▶</div>
+                    <div class="social-icon">♪</div>
+                </div>
+            </div>
+
+            <!-- Stores Section -->
+            <div class="footer-section">
+                <h3>Cửa hàng</h3>
+                <ul>
+                    <li>25 Tràng Tiền, Hoàn Kiếm, Hà Nội</li>
+                    <li>18 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+                    <li>45 Hai Bà Trưng, Quận 1, TP.HCM</li>
+                    <li>12 Lý Tự Trọng, Quận 1, TP.HCM</li>
+                    <li>89 Lạch Tray, Ngô Quyền, Hải Phòng</li>
+                </ul>
+            </div>
+
+            <!-- Support Section -->
+            <div class="footer-section">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="#">Tnagnle membership</a></li>
+                    <li><a href="#">Tài khoản</a></li>
+                    <li><a href="#">Hướng dẫn đo size</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Chính sách vận chuyển</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Hướng dẫn bảo quản</a></li>
+                </ul>
+            </div>
+
+            <!-- Expand Section -->
+            <div class="footer-section">
+                <h3>Mở rộng</h3>
+                <ul>
+                    <li><a href="#">Membership</a></li>
+                    <li><a href="#">Outfit</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Crew</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
