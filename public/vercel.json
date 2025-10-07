@@ -1,0 +1,11 @@
+{
+  "functions": {
+    "api/send-order-email.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "env": {
+    "RESEND_API_KEY": "@resend_api_key",
+    "ADMIN_EMAIL": "@admin_email"
+  }
+}

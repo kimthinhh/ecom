@@ -1,0 +1,16 @@
+{
+  "name": "tnagnle-checkout",
+  "version": "1.0.0",
+  "description": "Tnagnle checkout system with Resend email integration",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build step required'",
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "resend": "^2.1.0"
+  },
+  "keywords": ["checkout", "email", "resend", "fashion", "vercel"],
+  "author": "Tnagnle, Inc.",
+  "license": "MIT"
+}
