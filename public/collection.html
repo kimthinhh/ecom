@@ -261,6 +261,62 @@
             margin: 0 0 15px 0;
         }
 
+        /* Promotional offer overlay */
+        .text-overlay.promotional-offer {
+            top: 150px;
+            right : 200px;
+            text-align: right;
+            max-width: 300px;
+            z-index: 15;
+        }
+
+        .offer-text p {
+            font-size: 18px;
+            line-height: 1.3;
+            margin: 0 0 15px 0;
+           
+            font-weight: 500;
+            font-family: 'Canva Sans', serif;
+        }
+
+        .offer-text .shop-now-btn {
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+            letter-spacing: 1px;
+        }
+
+        .offer-text .shop-now-btn:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Left description overlay */
+        .text-overlay.left-description {
+            top: 150px;
+            left: 200px;
+            text-align: left;
+            max-width: 300px;
+            z-index: 15;
+        }
+
+        .left-description p {
+            font-size: 18px;
+            line-height: 1.3;
+            margin: 0;
+            color: #333;
+            font-weight: 400;
+            font-family: 'Canva Sans', sans-serif;
+        }
+
         .shop-now-btn {
             background-color: #333;
             color: white;
@@ -410,6 +466,36 @@
 
             .social-icons {
                 justify-content: center;
+            }
+
+            /* Responsive promotional offer */
+            .text-overlay.promotional-offer {
+                top: 150px;
+                right: 10px;
+                max-width: 200px;
+                text-align: right;
+            }
+
+            .text-overlay.left-description {
+                top: 150px;
+                left: 10px;
+                max-width: 200px;
+                text-align: left;
+            }
+
+            .offer-text p {
+                font-size: 14px;
+                line-height: 1.2;
+            }
+
+            .offer-text .shop-now-btn {
+                padding: 8px 16px;
+                font-size: 10px;
+            }
+
+            .left-description p {
+                font-size: 14px;
+                line-height: 1.2;
             }
         }
 
@@ -603,6 +689,21 @@
                 </div>
             </div>
             
+            <!-- Left description text overlay -->
+            <div class="text-overlay left-description">
+                <div class="left-description">
+                    <p>Our latest<br>collection of clothes<br>this year.</p>
+                </div>
+            </div>
+            
+            <!-- Promotional text overlay -->
+            <div class="text-overlay promotional-offer">
+                <div class="offer-text">
+                    <p>Get attractive<br>offers for your first<br>purchase.</p>
+                    <button class="shop-now-btn">SHOP NOW</button>
+                </div>
+            </div>
+            
           
             
             <div class="collection-gallery">
@@ -764,6 +865,15 @@
                     }
                 });
             });
+
+            // Promotional offer button click
+            const promotionalBtn = document.querySelector('.offer-text .shop-now-btn');
+            if (promotionalBtn) {
+                promotionalBtn.addEventListener('click', function() {
+                    // Redirect to product page
+                    window.location.href = 'product.html';
+                });
+            }
         });
     </script>
 
