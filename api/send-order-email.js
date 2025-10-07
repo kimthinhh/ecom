@@ -87,7 +87,7 @@ export default async function handler(req, res) {
         
         // Gửi email
         const { data, error } = await resend.emails.send({
-            from: 'orders@tnagnle.com', // Thay đổi domain theo domain của bạn
+            from: 'Resend <onboarding@resend.dev>', // Thay đổi domain theo domain của bạn
             to: [process.env.ADMIN_EMAIL || 'shiyou247@gmail.com'],
             subject: `🛍️ Đơn hàng mới từ ${orderData.customer.name} - Tnagnle, Inc.`,
             html: emailContent,
